@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="patientChatApp">
+<head>
+    <title>Health App v4.0</title>
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <script src="socket.io/socket.io.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-route.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <!-- <script src="js/app.js"></script> -->
+        <script src="js/contorller.js"></script>
+        <script src="js/dirPagination.js"></script>
+        <!-- <script src="/angoose/angoose-client.js"></script> -->
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+    <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button> -->
+    <a class="navbar-brand" href="#">Login</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     <!--  <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+      </ul> -->
+
+        <form class="navbar-form navbar-left" action="/login" method="post">
+            <div class="form-group">
+              <input type="text" placeholder="Email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" name="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-info">Submit</button>
+      </form>
+
+    </div><!-- /.navbar-collapse
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="row">
+    <div class="col-md-3 col-md-offset-1">
+    <h1>Health App <small> v4.0</small></h1>
+    <p class="lead">COMP308 | Assignments 1-4<br />Joanne Tanson 300767984</p>
+
+    <p>Please complete the Doctor Information Form to be complete your account setup.</p>
+
+    <a class="btn btn-primary btn-block" href="#PatientDetails">Patient Form</a>
+    <a class="btn btn-info btn-block" href="#PatientList">Patient List</a>   
+    <!-- <a class="btn btn-default btn-block" href="#Login">Login Form</a>  -->
+
+    <!-- <p class="small">Need an account? <a href="#SignUp">Signup</a></p> -->
+    </div>
+
+    <div class="col-sm-offset-4 col-sm-2 text-right">
+        <h3><span class="fa fa-lock"></span> Doctor Information Form</h3>
+    </div>
+    
+    <hr />
+    <div class="col-sm-offset-1 col-sm-5 text-left" ng-controller="doctorInfo">
+
+        <form class="form-group form-group-sm col-md-offset-1">
+            Email:
+            <input type="text" class="form-control" name="email" value="<%= user.local.email %>" required />
+            <br />
+
+            First Name: 
+            <input class="form-control" type="text" ng-model="doctor.firstName" pattern="^[A-Z][a-z0-9_-]{2,19}$" required />
+            <br />
+
+            Last Name: 
+            <input class="form-control" type="text" ng-model="doctor.lastName" pattern="^[A-Z][a-z0-9_-]{2,19}$" required />
+            <br />
+
+            <div class="col-md-offset-8">
+            <input class="btn btn-default" type="reset" ng-click="reset()" value="Reset" />
+            <input class="btn btn-default" type="submit" ng-click="saveDoctor(doctor, <%= user.local %>)" value="Submit" />
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>

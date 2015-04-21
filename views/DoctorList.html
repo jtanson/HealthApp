@@ -1,0 +1,18 @@
+    <div class="row" ng-controller="doctorInfo">
+        <br />
+
+        <form class="form-group form-group-sm col-md-offset-1">
+            
+            Family Doctor:
+            <select ng-model="selected">
+                <option ng-repeat="doctor in doctors">{{doctor.firstName}} {{doctor.lastName}}</option>
+            </select>
+
+            <div class="col-md-offset-8">
+
+            <input class="btn btn-default btn-sm" type="reset" ng-click="select(selected)" value="Select" />
+            </div>
+            
+        </form>
+        
+    </div>

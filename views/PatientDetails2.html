@@ -1,0 +1,35 @@
+    <div class="row" ng-controller="patientDetails">
+        <br />
+
+        <form class="form-group form-group-sm col-md-offset-1">
+
+            First Name: 
+            <input class="form-control" type="text" ng-model="patient.firstName" pattern="^[A-Z][a-z0-9_-]{2,19}$" required />
+            <br />
+
+            Last Name: 
+            <input class="form-control" type="text" ng-model="patient.lastName" pattern="^[A-Z][a-z0-9_-]{2,19}$" required />
+            <br />
+
+            Age: 
+            <input class="form-control" type="text" ng-model="patient.age" pattern="^[0-9]{2}$" />
+            <br />
+            
+            Family Doctor:
+            <select ng-model="patient.doctor">
+                <option ng-repeat="doctor in doctors">{{doctor.firstName}} {{doctor.lastName}}</option>
+            </select>
+
+            <!-- DATE FIELDS -->
+            <!-- Created at: -->
+            <!-- Last modified: -->
+
+            <div class="col-md-offset-9">
+            <!-- <input class="btn btn-default btn-sm" type="reset" ng-click="reset()" value="Reset" /> -->
+            <input class="btn btn-default" type="submit" ng-click="save(patient)" value="Insert" />
+            <input class="btn btn-default" type="submit" ng-click="update(visit)" value="Update" />
+            </div>
+            
+        </form>
+        
+    </div>
