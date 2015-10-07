@@ -1,0 +1,22 @@
+
+    <div class="row" ng-controller="patientDetails">
+    <br />
+
+    <!-- <input class="btn btn-default btn-block" type="submit" ng-click="find()" value="Get Patients from DB" /> -->
+
+    <ul class="messages">
+        <!-- <li ng-repeat="msg in msgs track by $index">{{msg}}</li> -->
+        <li ng-repeat="pat in pats track by $index">{{pat}}</li>
+    </ul>
+
+            <!-- <table>
+                <tr ng-repeat="pat in pats track by $index| orderBy:predicate:reverse">
+                    <td align="center">{{pat.firstName}}</td>
+                    <td align="center">{{pat.lastName}}</td>
+                    <td align="center">{{pat.phoneNo}}</td>
+                    <td align="center">{{pat.lastVisitDate}}</td>
+                    <td align="center">{{pat.Status}}</td>
+                </tr>
+            </table> -->
+
+    </div>

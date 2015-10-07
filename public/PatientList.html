@@ -1,0 +1,32 @@
+
+      <div class="row" ng-controller="patientController as patient">
+            <br />
+
+            <table class="table table-striped">
+            <tr>
+              <th><a href="" ng-click="predicate = 'firstName'; reverse=false">First Name</a></th>
+              <th><a href="" ng-click="predicate = 'lastName'; reverse=false">Last Name</a></th>
+              <th><a href="" ng-click="predicate = 'phoneNo'; reverse=false">Phone No.</a></th>
+              <th><a href="" ng-click="predicate = 'lastVisitDate'; reverse=false">Last Visit Date</a></th>
+              <th><a href="" ng-click="predicate = 'Status'; reverse=!reverse">Status</a></th>
+              <th colspan="2"></th>
+            </tr>
+                <tr ng-repeat="patient in patients | orderBy:predicate:reverse">
+                    <td align="center">{{patient.firstName}}</td>
+                    <td align="center">{{patient.lastName}}</td>
+                    <td align="center">{{patient.phoneNo}}</td>
+                    <td align="center">{{patient.lastVisitDate}}</td>
+                    <td align="center">{{patient.Status}}</td>
+
+                    <td align="center">
+                    <input class="btn btn-default btn-xs" type="submit" ng-click="setUser(patient)" value="Chat" /></td>
+                    <td align="center">
+                    <input class="btn btn-default btn-xs" type="submit" ng-click="modify(patient)" value="Modify" /></td>
+                </tr>
+            </table>
+
+            <div class="col-md-8 col-md-offset-2" ng-controller="patientDetails">
+              <input class="btn btn-default btn-block" type="submit" ng-click="find()" value="Get Patients from MongoDB" />
+            </div>
+
+        </div>

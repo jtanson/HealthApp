@@ -4,33 +4,15 @@ var express = require('express'),
     http = require('http').createServer(app),
     io = require('socket.io').listen(http);
 
-var passport = require("passport");
-var LocalStrategy = require('passport-local').Strategy;
-var flash    = require('connect-flash');
-
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-
-
 http.listen(4040, function(){
-  console.log('the magic happens on port *:4040');
+  console.log('listening on *:4040');
 });
 
-
-//connect to mongo database
-mongoose.connect('mongodb://localhost/combinedb', function(err) {
-    if(err) {
-        console.log('connection error', err);
-    } else {
-        console.log('connection successful');
-    }
+//connect to database
+mongoose.connect('mongodb://localhost/chat3', function(err) {
+    if (err) throw err;
+    else console.log('db is working');
 });
-
-
-//pass passport for configuration
-require('./config/passport')(passport);
-
 
 //schema = kind of data saved into mongodb application
 //the function takes an object of the data that you have
@@ -39,64 +21,11 @@ var msgSchema = mongoose.Schema({
     time: {type: Date, default: Date.now()} 
 });
 
-
-//assign schema to  model
+//model Chat = to save any message that comes in
+//link to Message schema
 var Chat = mongoose.model('Messages', msgSchema);
-// var Patient = mongoose.model('Infos', patientSchema);
-//patientSchema moved under models
-//msgSchema for Chat to be moved in models folder
-
-var Patient = require('./models/patientSchema.js');
-var Doctor = require('./models/doctorSchema.js');
-
-
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-
-
-//to view as html
-//app.set("view options", {layout: false});
-//app.engine('html', require('ejs').renderFile);
-
-app.set('view engine', 'html'); // set up ejs for templating
-
-// required for passport
-app.use(session({ secret: 'ilovejavascript' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash());
-
-
-//ROUTES
-// load routes and pass in our app and fully configured passport
-require('./routes/authentication.js')(app, passport); 
-
-
-var actions = require('./routes/actions');
-app.use('/actions', actions);
-var actionsDoctor = require('./routes/actionsDoctor');
-app.use('/actionsDoctor', actionsDoctor);
-// var routes = require('./routes/index');
-// app.use('/', routes);
-
-
-//GET to view list
-app.get('/list', function (req, res) {
-    Patient.find(function (err, doc) {
-        res.send(doc);
-    })
-});
-
-app.get('/listDoctors', function (req, res) {
-    Doctor.find(function (err, doc) {
-        res.send(doc);
-    })
-});
 
 io.sockets.on('connection', function(socket){
-
     socket.on('send msg', function(patient, data, dateString){
 
         //store data to db as msg (described in schema)
@@ -108,10 +37,7 @@ io.sockets.on('connection', function(socket){
             else
                 io.sockets.emit('get msg', patient, data, dateString);
         });
-    });    
-
+    });
 });
 
-// app.listen(4040);
-app.use(express.static(__dirname+'/views'));
-module.exports = app;
+app.use(express.static(__dirname+'/public'));

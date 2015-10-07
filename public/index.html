@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="patientChatApp">
+<head>
+    <title>Patient Chat v3.0</title>
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script src="socket.io/socket.io.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-route.min.js"></script>
+        <script src="js/app.js"></script>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-md-3 col-md-offset-1">
+    <h1>Patient Chat <small> v3.0</small></h1>
+    <p class="lead">COMP308 | Assignment 1+2<br />Joanne Tanson 300767984</p>
+    <p>Begin by clicking on Patient List. Then you can either modify* patient information, or select a patient username to begin chatting. Click on Patient Form to add* a new patient.</p>
+
+    <a class="btn btn-default btn-block" href="#PatientList">Patient List</a>  
+    <a class="btn btn-primary btn-block" href="#PatientDetails">Patient Form</a> 
+
+    <p class="small"><br/>*Saves to MongoDB</p>
+    </div>
+
+    <div class="col-md-7" ng-view></div>
+</div>
+
+</body>
+</html>
